@@ -1,0 +1,21 @@
+amount = 24
+print(amount)
+print("Two dozen is: ", amount)
+amount = 7 * 4
+print("forty-two is: ", amount)
+amount = 8
+amount = amount + 1
+print("The amount is: ", amount)
+amount += 1
+print(amount)
+amount = 8
+amount = amount * 2
+print(amount)
+amount *= 2
+print(amount)
+q = 18
+q -= 1  # Subtraction
+print("The value is now: ", q)
+
+q /= 2  # Division
+print("The
