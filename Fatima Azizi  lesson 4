@@ -1,0 +1,6 @@
+num = input("Please input a whole number: ") 
+num = int(num) 
+num2 = input("Use any whole number except zero: ")
+num2 = int(num2)
+result = num / num2
+print(f"When {num} is divided by {num2} the result is: {result}")
