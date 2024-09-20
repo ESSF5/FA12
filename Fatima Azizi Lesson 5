@@ -1,0 +1,15 @@
+import math
+length = input("Please input a length: ")
+length = float(length)
+area = math.pow(length, 2)
+print("The area of a square of side length", length, "is:", area)
+import math
+# Input from user
+r = input("Input the circle's radius: ")
+r = float(r)
+# Formula for area
+semicircle_area = 0.5 * math.pi * math.pow(r, 2)
+square_area = 4 * math.pow(r, 2)
+total_area = semicircle_area + square_area
+# Output the result
+print("Area of the Norman Window shape is:", total_area)
