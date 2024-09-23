@@ -1,0 +1,13 @@
+# Using predefined numbers instead of user input
+num = 42  # First number
+num2 = 7  # Second number
+
+# Check if the second number is zero
+if num2 == 0:
+    print("Error: You cannot divide by zero.")  # Show an error message if it is zero
+else:
+    # Perform the division if num2 is not zero
+    result = num / num2  
+    # Print the result
+    print(f"When {num} is divided by {num2}, the result is: {result}")
+When 42 is divided by 7, the result is: 6.0
