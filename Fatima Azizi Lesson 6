@@ -1,0 +1,26 @@
+# Step 1: Set the year of birth and age
+year_of_birth = 2008
+age = 16
+
+# Step 2: Double the birth year
+doubled_year = year_of_birth * 2
+
+# Step 3: Add 5 to the result
+added_five = doubled_year + 5
+
+# Step 4: Multiply by 50
+multiplied_result = added_five * 50
+
+# Step 5: Add the user's age
+added_age = multiplied_result + age
+
+# Step 6: Subtract 250
+subtracted_result = added_age - 250
+
+# Step 7: Divide by 100
+final_result = subtracted_result / 100
+
+# Step 8: Print the final result and interpretation
+print(f"The final result is: {final_result}")
+print("This number represents a unique calculation based on your birth year and age.")
+The final result is: 2008.16
