@@ -1,0 +1,49 @@
+import math
+
+x = input("Please input a whole number: ")
+x = int(x)
+y = input("Please input another nonzero whole number: ")
+y = int(y)
+print("Now deciding if", y, "is a factor of", x, "...")
+rem = x % y
+if rem == 0:
+    print("Yes!", y, "is a factor of", x)
+Yes! 3 is a factor of 6
+Nothing is printed (the condition is false, and there's no else clause)
+# Importing the math library
+import math
+
+# Task 1: Request input for x and y, handle zero and range issues
+x = int(input("Please input a whole number between 1 and 20: "))
+
+# Check if x is within the valid range
+if x < 1 or x > 20:
+    print(x, "is outside of range. Cannot continue.")
+else:
+    y = int(input("Please input another whole number between 1 and 20: "))
+    
+    # Check if y is within the valid range
+    if y < 1 or y > 20:
+        print(y, "is outside of range. Cannot continue.")
+    else:
+        # Now deciding if y is a factor of x
+        print("Now deciding if", y, "is a factor of", x, "...")
+        
+        # Task 2: Check if y is 0, and give an appropriate message
+        if y == 0:
+            print("Error: Division by zero is not allowed.")
+        else:
+            # Task 3: Perform the modulus operation to check if y is a factor of x
+            rem = x % y
+            if rem == 0:
+                print("Yes!", y, "is a factor of", x)
+            else:
+                print(y, "is not a factor of", x)
+Please input a whole number between 1 and 20: 50
+50 is outside of range. Cannot continue.
+Please input a whole number between 1 and 20: 5
+Please input another whole number between 1 and 20: 500
+500 is outside of range. Cannot continue.
+Please input a whole number between 1 and 20: 16
+Please input another whole number between 1 and 20: 7
+7 is not a factor of 16.
