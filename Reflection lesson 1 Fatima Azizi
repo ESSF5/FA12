@@ -1,0 +1,7 @@
+Reflection:
+
+This lab taught me how to do some input and output in Python, including using conditionals to make decisions in a program. I was able to design a menu that accepted user input and handled invalid input, and also a simple grading system with compound conditionals to check a range of input.
+
+The challenge here was in understanding how the decisions were to be made about either the user's valid or invalid input and to ensure that the program is behaving correctly in both cases. Boundary conditions had to be debugged to ensure that the grading system was working correctly.
+
+Overall, I am feeling more confident with conditionals and use of compound conditionals - and, or - and seeing how I can use them in more complex decision-making in programs.
