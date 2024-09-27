@@ -1,0 +1,26 @@
+# Part A: Initial code with a minor modification
+count = 9
+while (count != 0):
+    count -= 1
+    print(count)
+
+# Part B: Triangular numbers with suffixes
+n = 1
+triangular_number = 0
+
+while n <= 6:
+    triangular_number += n
+    
+    # Handling suffixes
+    if n == 1:
+        suffix = "st"
+    elif n == 2:
+        suffix = "nd"
+    elif n == 3:
+        suffix = "rd"
+    else:
+        suffix = "th"
+    
+    # Printing the triangular number with suffix
+    print(f"The {n}{suffix} triangular number is {triangular_number}")
+    n += 1
