@@ -1,0 +1,21 @@
+def triangular_number(n):
+    return n * (n + 1) // 2
+
+def factorial(n):
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+# Get input from the user
+n = int(input("Give me a value of n: "))
+print(f"Counting from j = 1 to {n}:")
+
+# Print header
+print(f"{'j':>5} {'tri':>10} {'factorial':>15}")
+
+# Loop to calculate triangular numbers and factorials
+for j in range(1, n + 1):
+    tri = triangular_number(j)
+    fact = factorial(j)
+    print(f"{j:>5} {tri:>10} {fact:>15}")
