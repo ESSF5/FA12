@@ -1,0 +1,29 @@
+  import math
+
+# Print the header of the table
+print(f" {'N':>3} | {'SQR':>5} | {'Cubes':>7} | {'Roots':>5}")
+print("---+-----+-------+-----")
+
+# Loop through values of N from 10 to 200, in steps of 15
+for N in range(10, 201, 15):
+    SQR = N ** 2
+    Cubes = N ** 3
+    Roots = round(math.sqrt(N), 2)
+    
+    # Print each row of the table with proper formatting
+    print(f"{N:>3} | {SQR:>5} | {Cubes:>7} | {Roots:>5.2f}")
+  N |  SQR |  Cubes | Roots
+---+-----+-------+-----
+ 10 |  100 |   1000 |  3.16
+ 25 |  625 |  15625 |  5.00
+ 40 | 1600 |  64000 |  6.32
+ 55 | 3025 | 166375 |  7.42
+ 70 | 4900 | 343000 |  8.37
+ 85 | 7225 | 614125 |  9.22
+100 |10000 |1000000 | 10.00
+115 |13225 |1520875 | 10.72
+130 |16900 |2197000 | 11.40
+145 |21025 |3048625 | 12.04
+160 |25600 |4096000 | 12.65
+175 |30625 |5359375 | 13.23
+190 |36100 |6859000 | 13.78
