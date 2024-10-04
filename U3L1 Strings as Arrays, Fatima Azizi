@@ -1,0 +1,21 @@
+# Original code
+progname = "Python"
+print(progname)  # Prediction A
+print(progname[0])  # Prediction B
+
+for c in progname:  # Prediction C
+    print(c, sep="", end="")
+print()  # E
+
+for c in range(len(progname)):  # Prediction F
+    print(c, progname[c])
+
+# Modified code to count spaces
+progname = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in."
+space_count = 0
+
+for char in progname:
+    if char == " ":
+        space_count += 1
+
+print(f"There are {space_count} spaces in the text.")
