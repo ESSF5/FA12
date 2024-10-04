@@ -1,0 +1,31 @@
+# Original code for predictions
+items = ["Apples", "Bananas", "Cherries", "Dosa"]
+print(items)  # Prediction A - Prints the entire list
+print("The number of items is %d." % len(items))  # Prediction B - Prints the number of items
+for i in items:  # Prediction C - Prints each item in the list
+    print(i)
+
+for c in range(len(items)):  # Prediction D - Prints index and item at each index
+    print(f"{c + 1}. {items[c]}")  # Adding 1 to start numbering from 1
+
+# Modified code to accept user input for items
+# Ask the user how many items to enter
+try:
+    num_items = int(input("How many items are you entering? "))  # Ensure you input a valid number
+except ValueError:
+    print("Please enter a valid number for the amount of items.")
+    exit()  # Exits the program if a valid number is not entered
+
+# Create an empty list to store the items
+items = []
+
+# Get the items from the user
+print("Enter your items now:")
+for i in range(num_items):
+    item = input("Next item: ")
+    items.append(item)
+
+# Output the list size and each item with numbering
+print(f"You have entered {num_items} items.")
+for index, item in enumerate(items):
+    print(f"{index + 1}. {item}")  # Adding 1 to start numbering from 1
