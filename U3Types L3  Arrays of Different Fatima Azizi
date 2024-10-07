@@ -1,0 +1,15 @@
+items = ["Apples", "Bananas", "Cherries", "Dosa"]
+sizes = []
+
+# First loop to calculate sizes
+for i in range(len(items)):
+    sizeI = len(items[i])
+    sizes.append(sizeI)
+
+# Second loop to print sizes and items
+for i in range(len(sizes)):
+    print("%d %s" % (sizes[i], items[i]))
+
+# New loop to compare sizes with the length of items
+for i in range(len(items)):
+    print(sizes[i] == len(items[i]))
