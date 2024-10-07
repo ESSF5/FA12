@@ -1,0 +1,17 @@
+ar2 = [[3, 4, 1, 2, 6],
+       [9, 2, 3, 7, 5],
+       [4, 2, 1, 0, 3]]
+
+row_sums = []  # 3x1 array to store sums
+
+for i in range(len(ar2)):
+    ar3 = ar2[i]
+    row_sum = 0  # Initialize sum for each row
+    for j in range(len(ar3)):
+        print(ar3[j], end=" ")
+        row_sum += ar3[j]  # Add each element to the row sum
+    row_sums.append(row_sum)  # Store the row sum
+    print()  # Print newline after each row
+
+print(ar2)  # Original 2D array
+print(row_sums)  # Print the row sums array
