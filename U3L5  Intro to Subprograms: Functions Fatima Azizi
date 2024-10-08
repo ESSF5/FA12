@@ -1,0 +1,35 @@
+import math
+
+def add(a, b):
+    return a + b
+
+def myPow(m, n):
+    return m ** n
+
+def get_number(prompt):
+    while True:
+        try:
+            num = float(input(prompt))  # Convert input to float
+            return num
+        except ValueError:
+            print("Please enter a valid number.")
+
+# Get user inputs
+num1 = get_number("Enter the first number: ")
+num2 = get_number("Enter the second number: ")
+
+# Call the add function and multiply the result by 2
+result = add(num1, num2) * 2
+print("The result is:", result)
+
+# Get user inputs for myPow
+base = get_number("Enter the base: ")
+exponent = get_number("Enter the exponent: ")
+
+# Calculate power using both custom function and math.pow()
+result_custom = myPow(base, exponent)
+result_math = math.pow(base, exponent)
+
+# Print results
+print(f"Custom power function result: {result_custom}")
+print(f"Python's math.pow result: {result_math}")
