@@ -1,0 +1,48 @@
+def factorize(N):
+  pass # replace this code with your code and a return statement
+
+# test values to test your program
+print(factorize(6))
+print(factorize(24))
+print(factorize(0))
+print(factorize(1))
+print(factorize(7))
+import math
+
+# Function to find proper factors of N
+def factorize(N):
+    factors = []
+    for i in range(1, math.isqrt(N) + 1):  # Loop from 1 to sqrt(N)
+        if N % i == 0:
+            factors.append(i)  # Add i as a factor
+            if i != 1 and i != N // i:
+                factors.append(N // i)  # Add the complementary factor
+    return factors
+
+# Function to sum the factors
+def sum_factors(factors):
+    return sum(factors)
+
+# Main function to classify the number
+def classify_number(N):
+    if N <= 0:
+        print("Goodbye!")
+        return
+    
+    factors = factorize(N)
+    factor_sum = sum_factors(factors)
+    
+    print(f"Please input a number: {N}")
+    print(f"Factor sum: {factor_sum}")
+    
+    if factor_sum == N:
+        print(f"{N} is perfect")
+    elif factor_sum > N:
+        print(f"{N} is abundant")
+    else:
+        print(f"{N} is deficient")
+
+# Testing the program with suggested values
+test_values = [1, 3, 6, 10, 11, 12, 15, 24, 28, 60, 64, 138, 276]
+for value in test_values:
+    classify_number(value)
