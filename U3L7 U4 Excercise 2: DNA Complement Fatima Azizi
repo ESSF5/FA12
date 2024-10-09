@@ -1,0 +1,21 @@
+# Function to find the complementary DNA strand
+def comp(S):
+    complement = ''
+    # Loop through each character in the string S
+    for nucleotide in S:
+        if nucleotide == 'A':
+            complement += 'T'
+        elif nucleotide == 'T':
+            complement += 'A'
+        elif nucleotide == 'C':
+            complement += 'G'
+        elif nucleotide == 'G':
+            complement += 'C'
+    return complement
+
+# Main part of the program
+# Sample input
+DNA_strand = "ATCAAGGCCTATTCCGGGAAAGG"
+# Call the function to get the complement
+complement_strand = comp(DNA_strand)
+# Output the result
