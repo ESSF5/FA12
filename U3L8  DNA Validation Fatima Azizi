@@ -1,0 +1,30 @@
+def validate(S):
+    valid_nucleotides = {'A', 'T', 'C', 'G'}
+    errors = []
+    
+    # Loop through each character and its position in the string
+    for i, char in enumerate(S):
+        if char not in valid_nucleotides:
+            errors.append((char, i + 1))  # store invalid character and its position
+
+    # If there are errors, print them and return False
+    if errors:
+        for error in errors:
+            print(f"Not valid: {error[0]} found in position {error[1]}.")
+        return False
+    else:
+        return True
+
+# Example usage:
+sequences = [
+    "ATCAAGGCCTATTCCGGGAAAGG", 
+    "TAGWGTGAAGTGCCATAGTT", 
+    "CGCAGATGCCGCTGGTATGA", 
+    "ATAGGTTAGCGGACCGAGAC"
+]
+
+for seq in sequences:
+    if validate(seq):
+        print("valid")
+    else:
+        print("Invalid sequence found") 
