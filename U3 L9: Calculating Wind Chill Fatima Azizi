@@ -1,0 +1,53 @@
+def wc(TdegC, windKPH):
+    """
+    * Calculates the wind chill, given
+    * TdegC: the temperature in degrees C
+    * windKPH: the wind speed in km/h
+    *
+    * Returns:
+    * vTemp: Wind chill in degrees C
+    """
+    vTemp = 13.12 + 0.6215 * TdegC - 11.37 * (windKPH ** 0.16) + 0.3965 * TdegC * (windKPH ** 0.16)
+    return vTemp
+
+# Test cases with sample data
+T = -5.0
+W = 10.0
+print("WC=%8.3f T=%8.3f W=%6.3f km/h" % (wc(T, W), T, W))
+
+T = -20.0
+W = 20.0
+print("WC=%8.3f T=%8.3f W=%6.3f km/h" % (wc(T, W), T, W))
+
+T = -45.0
+W = 40.0
+print("WC=%8.3f T=%8.3f W=%6.3f km/h" % (wc(T, W), T, W))
+def wc_risk(wind_chill):
+    if wind_chill > -10:
+        return "Low risk"
+    elif -28 <= wind_chill <= -10:
+        return "Moderate risk of hypothermia"
+    elif -40 <= wind_chill < -28:
+        return "High risk of frostbite"
+    elif -48 <= wind_chill < -40:
+        return "Severe risk of frostbite: exposed skin freezes in 5-10 minutes"
+    elif -55 <= wind_chill < -48:
+        return "Severe risk of frostbite: exposed skin freezes in 2-5 minutes"
+    else:
+        return "Extreme risk: exposed skin freezes in under 2 minutes"
+
+# Test cases with risk assessment
+T = -5.0
+W = 10.0
+wind_chill = wc(T, W)
+print("WC=%8.3f T=%8.3f W=%6.3f km/h Risk: %s" % (wind_chill, T, W, wc_risk(wind_chill)))
+
+T = -20.0
+W = 20.0
+wind_chill = wc(T, W)
+print("WC=%8.3f T=%8.3f W=%6.3f km/h Risk: %s" % (wind_chill, T, W, wc_risk(wind_chill)))
+
+T = -45.0
+W = 40.0
+wind_chill = wc(T, W)
+print("WC=%8.3f T=%8.3f W=%6.3f km/h Risk: %s" % (wind_chill, T, W, wc_risk(wind_chill)))
