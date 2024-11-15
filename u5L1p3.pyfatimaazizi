@@ -1,0 +1,8 @@
+import turtle
+t = turtle.Turtle()
+# Plotting a single point 
+t.penup()  # Lift the pen 
+t.goto(100, 100)  # Move to point (100, 100)
+t.dot(20, "red")  # Plot a red dot with size 20
+t.hideturtle()  # Hide the turtle
+turtle.done()
