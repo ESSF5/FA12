@@ -1,0 +1,14 @@
+t = turtle.Turtle()
+# Correct triangle code
+for _ in range(3):
+    t.forward(100)
+    t.left(120)  # Correct angle for an equilateral triangle
+# Modified triangle with error (range 60, angle 123)
+for _ in range(60):
+    t.forward(100)
+    t.left(123)  # Intentional error
+# Modified square code with error (range 80, angle 93)
+for _ in range(80):
+    t.forward(100)
+    t.left(93)  # Try 87 as well for variation
+turtle.done()
