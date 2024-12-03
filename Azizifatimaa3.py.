@@ -1,0 +1,80 @@
+import turtle
+
+def plotIt(t, x, y, d, color):
+    """
+    Plots a single point on the canvas at (x, y).
+    """
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+    t.dot(d, color)
+    t.penup()
+
+def readFile(filename):
+    """
+    Reads the XPM file and returns the color map and image data.
+    """
+    with open(filename, 'r') as file:
+        # Read metadata
+        cols, rows, num_colors = map(int, file.readline().strip().split())
+        
+        # Read color definitions
+        color_map = {}
+        for _ in range(num_colors):
+            line = file.readline().strip().split()
+            color_map[line[0]] = line[2]  # {symbol: color}
+
+        # Read image data
+        image_data = [file.readline().strip() for _ in range(rows)]
+        
+    return cols, rows, color_map, image_data
+
+def rotateCoords(x, y, rotation):
+    """
+    Rotates coordinates (x, y) based on the given rotation.
+    """
+    if rotation == 90:
+        return y, -x
+    elif rotation == -90:
+        return -y, x
+    elif rotation == 180:
+        return -x, -y
+    return x, y
+
+def plotImage(filename, rotation=0):
+    """
+    Reads data from the file and plots the image with optional rotation.
+    """
+    # Read file data
+    cols, rows, color_map, image_data = readFile(filename)
+    
+    # Setup Turtle
+    turtle.bgcolor("gray40")
+    turtle.tracer(0, 0)  # Turn off auto updates
+    t = turtle.Turtle()
+    t.hideturtle()
+    
+    # Calculate offsets for centering
+    x_offset = -cols // 2
+    y_offset = rows // 2
+
+    # Plot each point
+    for row_idx, row in enumerate(image_data):
+        for col_idx, symbol in enumerate(row):
+            color = color_map[symbol]
+            x = col_idx + x_offset
+            y = y_offset - row_idx
+            # Apply rotation
+            x, y = rotateCoords(x, y, rotation)
+            plotIt(t, x * 10, y * 10, 5, color)
+    
+    # Update the canvas
+    turtle.update()
+    turtle.done()
+
+# Main Program
+if __name__ == "__main__":
+    print("Available files: smiley_emoji_mod.xpm, rocky_bullwinkle_mod.xpm")
+    filename = input("Enter the filename: ").strip()
+    rotation = int(input("Enter the rotation (0, 90, -90, 180): ").strip())
+    plotImage(filename, rotation)
