@@ -1,0 +1,95 @@
+import turtle
+
+# Configure the Turtle environment
+def setup_turtle():
+    turtle.bgcolor("gray40")
+    turtle.tracer(0, 0)
+    t = turtle.Turtle()
+    t.hideturtle()
+    t.penup()
+    return t
+
+# Parse the data file
+def parse_file(filename):
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+        
+    # Read the first line (cols, rows, num_colors)
+    cols, rows, num_colors = map(int, lines[0].split())
+    
+    # Read color definitions
+    color_map = {}
+    for i in range(1, num_colors + 1):
+        symbol, _, color = lines[i].split()
+        color_map[symbol] = color.strip()
+    
+    # Read image data
+    image_data = lines[num_colors + 1:num_colors + 1 + rows]
+    return cols, rows, color_map, image_data
+
+# Plot a single point
+def plotIt(t, x, y, d, color):
+    t.penup()
+    t.goto(x, y)
+    t.dot(d, color)
+
+# Plot the image without rotation
+def plot_image(t, cols, rows, color_map, image_data):
+    # Calculate the center offset
+    x_offset = -cols // 2
+    y_offset = rows // 2
+    
+    for y, row in enumerate(image_data):
+        for x, char in enumerate(row.strip()):
+            color = color_map.get(char, "black")
+            plotIt(t, x + x_offset, -(y - y_offset), 4, color)  # Adjust coordinates
+
+# Plot the image with rotation
+def rotate_image(t, cols, rows, color_map, image_data, rotation):
+    # Calculate the center offset
+    x_offset = -cols // 2
+    y_offset = rows // 2
+    
+    for y, row in enumerate(image_data):
+        for x, char in enumerate(row.strip()):
+            color = color_map.get(char, "black")
+            # Apply rotation
+            if rotation == 180:
+                new_x = -(x + x_offset)
+                new_y = (y - y_offset)
+            elif rotation == 90:
+                new_x = -(y - y_offset)
+                new_y = (x + x_offset)
+            elif rotation == -90:
+                new_x = (y - y_offset)
+                new_y = -(x + x_offset)
+            else:  # No rotation
+                new_x = x + x_offset
+                new_y = -(y - y_offset)
+            
+            plotIt(t, new_x, new_y, 4, color)
+
+# Main function
+def main():
+    # Setup Turtle
+    t = setup_turtle()
+    
+    # Ask the user for input
+    filename = input("Enter the filename (e.g., smiley_emoji_mod.xpm): ")
+    rotation = int(input("Enter rotation (0, 90, -90, 180): "))
+    
+    # Parse the file
+    cols, rows, color_map, image_data = parse_file(filename)
+    
+    # Plot the image
+    if rotation == 0:
+        plot_image(t, cols, rows, color_map, image_data)
+    else:
+        rotate_image(t, cols, rows, color_map, image_data, rotation)
+    
+    # Update the canvas
+    turtle.update()
+    turtle.done()
+
+if __name__ == "__main__":
+    main()
