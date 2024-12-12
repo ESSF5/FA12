@@ -1,0 +1,60 @@
+import turtle
+
+# Open the file
+filename = "smiley_emoji_mod.xpm"
+fh = open(filename, "r")
+
+# Read the dimensions and number of colors
+header = fh.readline().strip()
+cols, rows, numColors = map(int, header.split())
+print(f"Image Dimensions: {cols} x {rows}, Number of Colors: {numColors}")
+
+# Read the color data
+colorDefs = {}
+for _ in range(numColors):
+    colorLine = fh.readline().strip()
+    sym, _, color = colorLine.split()
+    if sym == "~":  # Replace tilde with space
+        sym = " "
+    colorDefs[sym] = color
+
+# Output the color definitions
+print("\nColor Definitions:")
+for sym, color in colorDefs.items():
+    print(f"Symbol: '{sym}', Color: {color}")
+
+# Read the image data
+imageData = []
+for _ in range(rows):
+    line = fh.readline().strip()
+    imageData.append(line)
+
+# Output the image data
+print("\nImage Data:")
+for line in imageData:
+    print(line)
+
+# Close the file
+fh.close()
+
+# Plot the image using Turtle
+turtle.setup(width=cols * 10, height=rows * 10)
+t = turtle.Turtle()
+t.speed(0)
+t.penup()
+t.hideturtle()
+canvas = turtle.Screen()
+canvas.tracer(0)
+
+# Set up the color palette in Turtle
+canvas.colormode(255)
+
+# Draw the image
+for y, line in enumerate(imageData):
+    for x, sym in enumerate(line):
+        color = colorDefs.get(sym, "white")
+        t.goto(x * 10 - cols * 5, rows * 5 - y * 10)  # Adjust position
+        t.dot(10, color)
+
+canvas.update()
+turtle.done()
