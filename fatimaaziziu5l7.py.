@@ -1,0 +1,22 @@
+# Declare a global array to store the Fibonacci sequence
+S = []
+
+def fib(n):
+    # Base case for n = 1
+    if n == 1:
+        S.append(1)
+        return S
+    # Base case for n = 2
+    elif n == 2:
+        fib(1)  # Ensure the first element is added
+        S.append(1)
+        return S
+    # Recursive case for n > 2
+    else:
+        fib(n - 1)  # Recursively calculate the previous terms
+        S.append(S[-1] + S[-2])  # Append the sum of the last two terms
+        return S
+
+# Call the function and print the result
+fib(45)
+print(S)
