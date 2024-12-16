@@ -1,0 +1,31 @@
+def validate(N):
+    # Convert the number to a string to process digits
+    N = str(N)
+    # Reverse the number to make processing easier
+    reversed_digits = N[::-1]
+    
+    total = 0
+    
+    # Iterate through the reversed digits
+    for i, digit in enumerate(reversed_digits):
+        digit = int(digit)
+        # Double every second digit (0-based index, so odd index in reversed array)
+        if i % 2 == 1:
+            digit *= 2
+            # If doubling results in a number greater than 9, subtract 9
+            if digit > 9:
+                digit -= 9
+        # Add the digit to the total
+        total += digit
+    
+    # Check if the total is divisible by 10
+    return total % 10 == 0
+
+
+# Input and output
+print("Validate a number with the Luhn Algorithm!")
+number = input("Enter any number: ")
+if validate(number):
+    print(f"{number} is a valid number.")
+else:
+    print(f"{number} is not a valid number.")
