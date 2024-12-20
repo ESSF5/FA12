@@ -1,0 +1,89 @@
+wordle_database.py.
+# Helper function to convert month abbreviation to number
+def month_to_number(month):
+    months = {"Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04",
+              "May": "05", "Jun": "06", "Jul": "07", "Aug": "08",
+              "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"}
+    return months.get(month, "00")  # Return "00" if the month is invalid
+
+# Merge function
+def merge(day, month, year):
+    month_num = month_to_number(month)
+    return int(year + month_num + day)
+
+# Sort function
+def sort(words, dates):
+    combined = list(zip(words, dates))
+    combined.sort(key=lambda x: x[0])  # Sort by word (alphabetical)
+    words[:], dates[:] = zip(*combined)
+
+# Binary search for word
+def isMatch(target, words, dates):
+    low, high = 0, len(words) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if words[mid] == target:
+            return dates[mid]  # Return the corresponding date
+        elif words[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return 0  # Word not found
+
+# Search by date
+def search_by_date(date, dates, words):
+    if date in dates:
+        return words[dates.index(date)]
+    return None
+
+# Main program
+def main():
+    print("Welcome to the Wordle Database!")
+    words = []
+    dates = []
+
+    # Load data from file
+    try:
+        with open("wordle.dat", "r") as file:
+            for line in file:
+                month, day, year, word = line.split()
+                date = merge(day, month, year)
+                dates.append(date)
+                words.append(word)
+    except FileNotFoundError:
+        print("Error: wordle.dat file not found. Please ensure the file is in the correct directory.")
+        return
+
+    # Sort data
+    sort(words, dates)
+
+    while True:
+        choice = input("Enter 'w' to search by word, or 'd' to search by date (q to quit): ").lower()
+        if choice == 'q':
+            print("Goodbye!")
+            break
+        elif choice == 'w':
+            target_word = input("What word are you looking for? ").upper()
+            result = isMatch(target_word, words, dates)
+            if result:
+                print(f"The word {target_word} was the solution to the puzzle on {result}.")
+            else:
+                print(f"The word {target_word} was not found in the database.")
+        elif choice == 'd':
+            year = input("Enter the year (e.g., 2024): ")
+            month = input("Enter the month (e.g., Jan): ")
+            day = input("Enter the day (e.g., 12): ").zfill(2)
+            date = merge(day, month, year)
+            if 20210619 <= date <= 20240421:
+                word = search_by_date(date, dates, words)
+                if word:
+                    print(f"The word on {date} was {word}.")
+                else:
+                    print(f"No word was found for {date}.")
+            else:
+                print(f"{date} is out of range. Please enter a valid date.")
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
