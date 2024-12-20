@@ -1,0 +1,127 @@
+# Assignment 3 - Turtle Graphics Plotter
+# Author: Fatima
+# Date: December 2024
+# Description: This program uses Turtle to plot points from .xpm files and optionally rotates the image.
+
+import turtle
+
+
+def read_file(filename):
+    """
+    Reads the .xpm file and extracts image dimensions, color mappings, and image data.
+    Args:
+        filename (str): Path to the .xpm file.
+    Returns:
+        tuple: (columns, rows, color_map, image_data)
+    """
+    try:
+        with open(filename, "r") as file:
+            # Read the first line: columns, rows, and number of colors
+            first_line = file.readline().strip()
+            cols, rows, num_colors = map(int, first_line.split())
+
+            # Read color definitions
+            color_map = {}
+            for _ in range(num_colors):
+                line = file.readline().strip()
+                symbol, _, color = line.split()
+                color_map[symbol] = color
+
+            # Read image data
+            image_data = []
+            for _ in range(rows):
+                image_data.append(file.readline().strip())
+
+        return cols, rows, color_map, image_data
+
+    except FileNotFoundError:
+        print("Error: File not found.")
+        return None, None, None, None
+
+
+def plot_it(turtle_obj, x, y, size, color):
+    """
+    Plots a single point on the canvas.
+    Args:
+        turtle_obj (turtle.Turtle): Turtle object for plotting.
+        x (int): X-coordinate.
+        y (int): Y-coordinate.
+        size (int): Diameter of the dot.
+        color (str): Color of the dot.
+    """
+    turtle_obj.penup()
+    turtle_obj.goto(x, y)
+    turtle_obj.pendown()
+    turtle_obj.dot(size, color)
+    turtle_obj.penup()
+
+
+def plot_image(cols, rows, color_map, image_data, rotate=False):
+    """
+    Plots the entire image on the canvas.
+    Args:
+        cols (int): Number of columns.
+        rows (int): Number of rows.
+        color_map (dict): Mapping of symbols to colors.
+        image_data (list): 2D list of image symbols.
+        rotate (bool): Whether to rotate the image by 180 degrees.
+    """
+    # Calculate offsets to center the image
+    x_offset = -cols // 2
+    y_offset = rows // 2
+
+    for row in range(rows):
+        for col in range(cols):
+            symbol = image_data[row][col]
+            if symbol in color_map:
+                color = color_map[symbol]
+
+                # Calculate coordinates
+                x = x_offset + col
+                y = y_offset - row
+
+                # Apply rotation if needed
+                if rotate:
+                    x, y = -x, -y
+
+                plot_it(t, x * 5, y * 5, 4, color)  # Scale by 5 for better visibility
+
+
+# Main program starts here
+if __name__ == "__main__":
+    print("Welcome to Turtle Graphics Plotter!")
+    print("Choose an image to plot:")
+    print("1. Smiley Emoji")
+    print("2. Rocky and Bullwinkle")
+
+    choice = input("Enter your choice (1 or 2): ")
+
+    if choice == "1":
+        filename = "smiley_emoji_mod.xpm"
+    elif choice == "2":
+        filename = "rocky_bullwinkle_mod.xpm"
+    else:
+        print("Invalid choice. Exiting program.")
+        exit()
+
+    # Read the file
+    cols, rows, color_map, image_data = read_file(filename)
+    if not cols:
+        exit()
+
+    # Ask user if they want the image rotated
+    rotate_option = input("Would you like to rotate the image? (yes/no): ").strip().lower()
+    rotate = rotate_option == "yes"
+
+    # Setup Turtle
+    turtle.bgcolor("gray40")
+    turtle.tracer(0, 0)  # Disable updates for faster plotting
+    t = turtle.Turtle()
+    t.hideturtle()
+
+    # Plot the image
+    plot_image(cols, rows, color_map, image_data, rotate)
+    turtle.update()  # Update the canvas
+
+    print("Image plotted successfully!")
+    turtle.done()
